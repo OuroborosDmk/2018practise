@@ -1,5 +1,5 @@
 (function (){
-	"use strict";
+	//"use strict";
     let sourceData = [{
 	    product: "手机",
 	    region: "华东",
@@ -38,17 +38,45 @@
 	    sale: [10, 40, 10, 6, 5, 6, 8, 6, 6, 6, 7, 26]
 	}]
 
-	function check(){
-		function check1(){
-			let east=document.getElementById("east");
-			let south=document.getElementById("south");
-			let north=document.getElementById("north");
-			let area_all=document.getElementById("area_all");
-			let phone=document.getElementById("phone");
-			let PC=document.getElementById("PC");
-			let sound=document.getElementById("sound");
-			let type_all=document.getElementById("type_all");
+	document.getElementById("east").onclick=checkone;
+	document.getElementById("south").onclick=checkone;
+	document.getElementById("north").onclick=checkone;
+	document.getElementById("area_all").onclick=checkone;
+	document.getElementById("phone").onclick=checkone;
+	document.getElementById("PC").onclick=checkone;
+	document.getElementById("sound").onclick=checkone;
+	document.getElementById("type_all").onclick=checkone;
 
+	function checkone(){
+		let east=document.getElementById("east");
+		let south=document.getElementById("south");
+		let north=document.getElementById("north");
+		let area_all=document.getElementById("area_all");
+		let phone=document.getElementById("phone");
+		let PC=document.getElementById("PC");
+		let sound=document.getElementById("sound");
+		let type_all=document.getElementById("type_all");
+
+		if(area_all.checked==true){
+			if(east.checked==true&&south.checked==true&&north.checked==true){
+				area_all.checked=false;
+			}
+			else if(east.checked==false||south.checked==false||north.checked==false){
+				east.checked=true;
+				south.checked=true;
+				north.checked=true;
+			}
+		}
+		else if(east.checked==true&&south.checked==true&&north.checked==true){
+			area_all.checked=true;
+		}
+		else if(east.checked==false||south.checked==false||north.checked==false){
+			area_all.checked=false;
+		}
+		
+
+		/*
+		function check1(){
 			if(east.checked)
 		}
 
@@ -62,9 +90,9 @@
 
 		function checkall(){
 
-		}
+		}*/
 	}
-
+	/*
     function set_table(){
     	let table = document.createElement("table");
     	document.body.appendChild(table);
@@ -117,4 +145,5 @@
     get_data();
     area_select.onchange=get_data;
     type_select.onchange=get_data;
+    */
 })();
