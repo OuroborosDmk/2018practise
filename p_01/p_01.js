@@ -49,27 +49,60 @@
     			table_tr.appendChild(table_td);
     		}
     	}
+    	let table_name = document.getElementsByTagName("td");
+    	for(let k=1;k<13;k++){
+    		table_name[k].innerHTML= k + " 月";
+    	}
+    	table_name[13].innerHTML="手机";
+    	table_name[26].innerHTML="笔记本";
+    	table_name[39].innerHTML="智能音箱";
     }
 
     function get_data(){
+    	let typeOfGoods = new Array();
+    	let saleOfMonth = new Array();
+    	let subOfDate = new Array();
     	let area_select = document.getElementById("area_select");
     	let area_select_val = area_select.value;
     	if(area_select_val == "east"){
-
-    	}
+	    	for(let key in sourceData){
+	    		if(sourceData[key].region=="华东"){
+	    			typeOfGoods.push(sourceData[key].product);
+	    			saleOfMonth.push(sourceData[key].sale);
+	    		}
+	    	}
+		}
     	else if(area_select_val == "south"){
-    		return 2
+    		for(let key in sourceData){
+	    		if(sourceData[key].region=="华南"){
+	    			typeOfGoods.push(sourceData[key].product);
+	    			saleOfMonth.push(sourceData[key].sale);
+	    		}
+	    	}
     	}
     	else if(area_select_val == "north"){
-    		return 3
+    		for(let key in sourceData){
+	    		if(sourceData[key].region=="华北"){
+	    			typeOfGoods.push(sourceData[key].product);
+	    			saleOfMonth.push(sourceData[key].sale);
+	    		}
+	    	}
     	}
+
+    	subOfDate.push(typeOfGoods);
+    	subOfDate.push(saleOfMonth);
+    	set_data(subOfDate);
     }
 
-    function set_data(){
-    	let typeOfTable = get_data();
-    	
+    function set_data(subOfDate){
+    	let typeOfGoods = new Array();
+    	let saleOfMonth = new Array();
+    	typeOfGoods = subOfDate[0];
+    	saleOfMonth = subOfDate[1];
+
+
     }
 
     set_table();
-    //alert(typeof(sourceData));
+    get_data();
 })();

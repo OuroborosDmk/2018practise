@@ -8,5 +8,7 @@ table tr{
 	border:1px solid black;
 }
 table td{
+	height:50px;
+	width:50px;
 	border:1px solid black;
 }
