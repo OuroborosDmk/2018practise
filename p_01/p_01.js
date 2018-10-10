@@ -38,10 +38,39 @@
 	    sale: [10, 40, 10, 6, 5, 6, 8, 6, 6, 6, 7, 26]
 	}]
 
+	function check(){
+		function check1(){
+			let east=document.getElementById("east");
+			let south=document.getElementById("south");
+			let north=document.getElementById("north");
+			let area_all=document.getElementById("area_all");
+			let phone=document.getElementById("phone");
+			let PC=document.getElementById("PC");
+			let sound=document.getElementById("sound");
+			let type_all=document.getElementById("type_all");
+
+			if(east.checked)
+		}
+
+		function check2(){
+
+		}
+
+		function check3(){
+
+		}
+
+		function checkall(){
+
+		}
+	}
+
     function set_table(){
     	let table = document.createElement("table");
     	document.body.appendChild(table);
-    	for(let i=0;i<4;i++){
+    	let type_select = document.getElementById("type_select");
+    	let type_select_val = type_select.value;
+    	for(let i=0;i<2;i++){
     		let table_tr = document.createElement("tr");
     		table.appendChild(table_tr);
     		for(let i=0;i<13;i++){
@@ -53,9 +82,7 @@
     	for(let k=1;k<13;k++){
     		table_name[k].innerHTML= k + " 月";
     	}
-    	table_name[13].innerHTML="手机";
-    	table_name[26].innerHTML="笔记本";
-    	table_name[39].innerHTML="智能音箱";
+    	table_name[13].innerHTML=type_select_val;
     }
 
     function get_data(){
@@ -64,45 +91,30 @@
     	let subOfDate = new Array();
     	let area_select = document.getElementById("area_select");
     	let area_select_val = area_select.value;
-    	if(area_select_val == "east"){
-	    	for(let key in sourceData){
-	    		if(sourceData[key].region=="华东"){
-	    			typeOfGoods.push(sourceData[key].product);
-	    			saleOfMonth.push(sourceData[key].sale);
-	    		}
+    	let type_select = document.getElementById("type_select");
+    	let type_select_val = type_select.value;
+    	for(let key in sourceData){
+	    	if(sourceData[key].region==area_select_val&&sourceData[key].product==type_select_val){
+	    		saleOfMonth.push(sourceData[key].sale);
 	    	}
-		}
-    	else if(area_select_val == "south"){
-    		for(let key in sourceData){
-	    		if(sourceData[key].region=="华南"){
-	    			typeOfGoods.push(sourceData[key].product);
-	    			saleOfMonth.push(sourceData[key].sale);
-	    		}
-	    	}
-    	}
-    	else if(area_select_val == "north"){
-    		for(let key in sourceData){
-	    		if(sourceData[key].region=="华北"){
-	    			typeOfGoods.push(sourceData[key].product);
-	    			saleOfMonth.push(sourceData[key].sale);
-	    		}
-	    	}
-    	}
-
-    	subOfDate.push(typeOfGoods);
+	    }
+	    subOfDate.push(area_select_val);
     	subOfDate.push(saleOfMonth);
     	set_data(subOfDate);
     }
 
     function set_data(subOfDate){
-    	let typeOfGoods = new Array();
     	let saleOfMonth = new Array();
-    	typeOfGoods = subOfDate[0];
     	saleOfMonth = subOfDate[1];
-
-
+    	let table_name = document.getElementsByTagName("td");
+    	table_name[0].innerHTML = subOfDate[0];
+    	for(let i=14;i<26;i++){
+    		table_name[i].innerHTML = saleOfMonth[0][i-14];
+    	}
     }
 
     set_table();
     get_data();
+    area_select.onchange=get_data;
+    type_select.onchange=get_data;
 })();

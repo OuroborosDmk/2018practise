@@ -5,11 +5,19 @@
 	<link rel="stylesheet" type="text/css" href="p_01.css" />
 </head>
 <body>
-	<select id="area_select">
-		<option value="east">华东</option>
-		<option value="south">华北</option>
-		<option value="north">华南</option>
-	</select>
+	<form id="area_select">
+		<input type="checkbox" name="vehicle" value="华东" id="east" onclick="check1()">华东<br>
+		<input type="checkbox" name="vehicle" value="华南" id="south" onclick="check2()">华南<br>
+		<input type="checkbox" name="vehicle" value="华北" id="north" onclick="check3()">华北<br>
+		<input type="checkbox" name="vehicle" value="全选" id="area_all" onclick="checkall()">全选
+	</form>
+	<form id="type_select">
+		<input type="checkbox" name="vehicle" value="手机" id="phone" onclick="check()">手机<br>
+		<input type="checkbox" name="vehicle" value="笔记本" id="PC" onclick="check()">笔记本<br>
+		<input type="checkbox" name="vehicle" value="智能音箱" id="sound" onclick="check()">智能音箱<br>
+		<input type="checkbox" name="vehicle" value="全选" id="type_all" onclick="check()">全选
+	</form>
+	<br>
 	<script src="ife31data.js"></script>
 	<script src="p_01.js"></script>
 </body>

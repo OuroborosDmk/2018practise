@@ -12,3 +12,7 @@ table td{
 	width:50px;
 	border:1px solid black;
 }
+form{
+	float:left;
+	margin-left:50px;
+}
