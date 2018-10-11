@@ -39,6 +39,9 @@
 	}]
 	let area_item=["华东","华南","华北"];
 	let product_item=["手机","笔记本","智能音箱"];
+	let set_table_sign=false;
+	let area_key=new Array();
+	let product_key=new Array();
 
 	//document.getElementsByName("check_item").onclick=checkone;
 						
@@ -53,9 +56,8 @@
 	
 
 	function checkone(){
-		let area_key = new Array();
-		let product_key = new Array();
-		let sub_key = new Array();
+		area_key=[];
+		product_key=[];
 		let check_item=document.getElementsByName("check_item");
 		let item_id=this.id;
 		if(document.getElementById(item_id).checked==true){
@@ -100,11 +102,8 @@
 		}
 
 		for(let i=0;i<check_item.length;i++){
-			if(check_item[i]==true){
-				if(i==3&i==7){
-					break;
-				}
-				else if(i<3){
+			if(check_item[i].checked==true){
+				if(i<3){
 					area_key.push(area_item[i]);
 				}
 				else if(i>3){
@@ -112,30 +111,42 @@
 				}
 			}
 		}
-		sub_key.push(area_item);
-		sub_key.push(product_item);
 
-		return sub_key;
+		if(area_key.length>0&&product_key.length>0){
+			set_table_sign=true;
+			if(set_table_sign==true){
+    			set_table(area_key,product_key);
+    			//get_data();
+    		}
+		}
 	}//获取checkbox的值
 	
-    function set_table(){
-    	let table = document.createElement("table");
-    	document.body.appendChild(table);
-    	let type_select = document.getElementById("type_select");
-    	let type_select_val = type_select.value;
-    	for(let i=0;i<2;i++){
-    		let table_tr = document.createElement("tr");
-    		table.appendChild(table_tr);
-    		for(let i=0;i<13;i++){
-    			let table_td = document.createElement("td");
-    			table_tr.appendChild(table_td);
+    function set_table(table_area_key,table_product_key){
+    	let teble_box=document.getElementById("table_box");
+    		if(document.getElementsByTagName("table")){
+    			var childs=table_box.childNodes; 
+				for(var i=childs.length-1;i>0;i--){  
+  					table_box.removeChild(childs[i]); 
+				}
     		}
+    	for(let m=0;m<table_area_key.length;m++){
+    		let table = document.createElement("table");
+	    	table_box.appendChild(table);
+	    	for(let i=0;i<table_product_key.length+1;i++){
+	    		let table_tr = document.createElement("tr");
+	    		table.appendChild(table_tr);
+	    		for(let j=0;j<13;j++){
+	    			let table_td = document.createElement("td");
+	    			table_tr.appendChild(table_td);
+	    		}
+	    	}
+	    	let table_name = document.getElementsByTagName("td");
+	    	let table_name_sign=m*13*(table_product_key.length+1);
+	    	for(let k=table_name_sign+1,n=1;k<table_name_sign+13;k++,n++){
+	    		table_name[k].innerHTML= n + " 月";
+	    	}
+	    	table_name[table_name_sign].innerHTML=table_area_key[m];
     	}
-    	let table_name = document.getElementsByTagName("td");
-    	for(let k=1;k<13;k++){
-    		table_name[k].innerHTML= k + " 月";
-    	}
-    	table_name[13].innerHTML=type_select_val;
     }
 
     function get_data(){
@@ -166,8 +177,4 @@
     	}
     }
 
-    set_table();
-    get_data();
-    area_select.onchange=get_data;
-    type_select.onchange=get_data;
 })();
