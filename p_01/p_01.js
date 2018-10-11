@@ -37,7 +37,11 @@
 	    region: "华南",
 	    sale: [10, 40, 10, 6, 5, 6, 8, 6, 6, 6, 7, 26]
 	}]
+	let area_item=["华东","华南","华北"];
+	let product_item=["手机","笔记本","智能音箱"];
 
+	//document.getElementsByName("check_item").onclick=checkone;
+						
 	document.getElementById("east").onclick=checkone;
 	document.getElementById("south").onclick=checkone;
 	document.getElementById("north").onclick=checkone;
@@ -46,53 +50,74 @@
 	document.getElementById("PC").onclick=checkone;
 	document.getElementById("sound").onclick=checkone;
 	document.getElementById("type_all").onclick=checkone;
+	
 
 	function checkone(){
-		let east=document.getElementById("east");
-		let south=document.getElementById("south");
-		let north=document.getElementById("north");
-		let area_all=document.getElementById("area_all");
-		let phone=document.getElementById("phone");
-		let PC=document.getElementById("PC");
-		let sound=document.getElementById("sound");
-		let type_all=document.getElementById("type_all");
+		let area_key = new Array();
+		let product_key = new Array();
+		let sub_key = new Array();
+		let check_item=document.getElementsByName("check_item");
+		let item_id=this.id;
+		if(document.getElementById(item_id).checked==true){
+			this.id.checked==false;
+		}
+		else if(document.getElementById(item_id).checked==false){
+			this.id.checked==true;
+		}
 
-		if(area_all.checked==true){
-			if(east.checked==true&&south.checked==true&&north.checked==true){
-				area_all.checked=false;
+		if(check_item[0].checked==false||check_item[1].checked==false||check_item[2].checked==false){
+			check_item[3].checked=false;
+		}
+		else if(check_item[3].checked==true){
+			if(check_item[0].checked==true&&check_item[1].checked==true&&check_item[2].checked==true){
+				check_item[3].checked=false;
 			}
-			else if(east.checked==false||south.checked==false||north.checked==false){
-				east.checked=true;
-				south.checked=true;
-				north.checked=true;
+			else if(check_item[0].checked==false||check_item[1].checked==false||check_item[2].checked==false){
+				check_item[0].checked=true;
+				check_item[1].checked=true;
+				check_item[2].checked=true;
 			}
 		}
-		else if(east.checked==true&&south.checked==true&&north.checked==true){
-			area_all.checked=true;
-		}
-		else if(east.checked==false||south.checked==false||north.checked==false){
-			area_all.checked=false;
-		}
-		
-
-		/*
-		function check1(){
-			if(east.checked)
+		else if(check_item[0].checked==true&&check_item[1].checked==true&&check_item[2].checked==true){
+			check_item[3].checked=true;
 		}
 
-		function check2(){
-
+		if(check_item[4].checked==false||check_item[5].checked==false||check_item[6].checked==false){
+			check_item[7].checked=false;
+		}
+		else if(check_item[7].checked==true){
+			if(check_item[4].checked==true&&check_item[5].checked==true&&check_item[6].checked==true){
+				check_item[7].checked=false;
+			}
+			else if(check_item[4].checked==false||check_item[5].checked==false||check_item[6].checked==false){
+				check_item[4].checked=true;
+				check_item[5].checked=true;
+				check_item[6].checked=true;
+			}
+		}
+		else if(check_item[4].checked==true&&check_item[5].checked==true&&check_item[6].checked==true){
+			check_item[7].checked=true;
 		}
 
-		function check3(){
-
+		for(let i=0;i<check_item.length;i++){
+			if(check_item[i]==true){
+				if(i==3&i==7){
+					break;
+				}
+				else if(i<3){
+					area_key.push(area_item[i]);
+				}
+				else if(i>3){
+					product_key.push(product_item[i-4]);
+				}
+			}
 		}
+		sub_key.push(area_item);
+		sub_key.push(product_item);
 
-		function checkall(){
-
-		}*/
-	}
-	/*
+		return sub_key;
+	}//获取checkbox的值
+	
     function set_table(){
     	let table = document.createElement("table");
     	document.body.appendChild(table);
@@ -145,5 +170,4 @@
     get_data();
     area_select.onchange=get_data;
     type_select.onchange=get_data;
-    */
 })();
