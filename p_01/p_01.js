@@ -122,31 +122,44 @@
 	}//获取checkbox的值
 	
     function set_table(table_area_key,table_product_key){
+
     	let teble_box=document.getElementById("table_box");
-    		if(document.getElementsByTagName("table")){
-    			var childs=table_box.childNodes; 
-				for(var i=childs.length-1;i>0;i--){  
-  					table_box.removeChild(childs[i]); 
-				}
-    		}
-    	for(let m=0;m<table_area_key.length;m++){
-    		let table = document.createElement("table");
-	    	table_box.appendChild(table);
-	    	for(let i=0;i<table_product_key.length+1;i++){
-	    		let table_tr = document.createElement("tr");
-	    		table.appendChild(table_tr);
-	    		for(let j=0;j<13;j++){
-	    			let table_td = document.createElement("td");
-	    			table_tr.appendChild(table_td);
-	    		}
+    	let table = document.createElement("table");
+	    table_box.appendChild(table);
+	    let maxrow=Math.max(table_area_key.length,table_product_key.length)+1
+	    for(let i=0;i<maxrow;i++){
+	    	let table_tr = document.createElement("tr");
+	    	table.appendChild(table_tr);
+	    	for(let j=0;j<14;j++){
+	    		let table_td = document.createElement("td");
+	    		table_tr.appendChild(table_td);
 	    	}
-	    	let table_name = document.getElementsByTagName("td");
-	    	let table_name_sign=m*13*(table_product_key.length+1);
-	    	for(let k=table_name_sign+1,n=1;k<table_name_sign+13;k++,n++){
-	    		table_name[k].innerHTML= n + " 月";
+	    }
+	    let table_name = document.getElementsByTagName("td");
+	    if(table_area_key.length==1&&table_product_key.length>1){
+	    	table_name[0].innerHTML="地区";
+	    	table_name[14].rowSpan=maxrow-1;
+	    	
+	    	table_name[1].innerHTML="商品";
+	    	if(table_product_key.length==1){
+	    		table_name[15].rowSpan=maxrow-1;
 	    	}
-	    	table_name[table_name_sign].innerHTML=table_area_key[m];
-    	}
+	    }
+	    else{
+	    	table_name[0].innerHTML="商品";
+	    	table_name[1].innerHTML="地区";
+	    	if(table_product_key.length==1){
+	    		table_name[14].rowSpan=maxrow-1;
+	    	}
+	    	else if(table_area_key.length==1){
+	    		table_name[15].rowSpan=maxrow-1;
+	    	}
+	    }
+	    //rowspan="2"
+
+	    for(let k=2;k<14;k++){
+	    	table_name[k].innerHTML=k-1+" 月";
+	    }
     }
 
     function get_data(){
