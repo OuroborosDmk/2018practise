@@ -8,9 +8,12 @@
 
 <circle cx="350" cy="200" r="100" stroke="red"
 stroke-width="2" fill="red"/>
-<path d="M350 300 L350 700
-		 M350 700 Q450 700 450 600 Z"
-	style="fill:green;stroke:green;stroke-width:10"/>
+<path d="M350 300 L350 600
+		 M350 600 Q450 600 450 500 
+		 M450 500 Q350 500 350 600 
+		 M350 600 Q250 600 250 500
+		 M250 500 Q350 500 350 600 Z"
+	style="fill:green;stroke:green;stroke-width:2"/>
 
 
 </svg>
