@@ -148,6 +148,7 @@
 	    }
 	    let table_name = document.getElementsByTagName("td");
 	    let td_num=14;
+	    let tablename=makeArray(table_name);
 	    if(table_area_key.length==1&&table_product_key.length>1){
 	    	table_name[td_num*0].innerHTML="地区";
 	    	table_name[td_num*1].rowSpan=rowspan;
@@ -163,6 +164,11 @@
 	    	switch(table_product_key.length){
 	    		case 1:
 	    			table_name[td_num*1].rowSpan=rowspan;
+	    			//alert(Object.prototype.toString.call(tablename));
+	    			for(let i=1;i<=table_area_key.length;i++){
+	    				tablename.splice(td_num*(1+i),1);
+	    				alert(i);
+	    			}
 	    			break;
 	    		case 2:
 	    			table_name[td_num*1].rowSpan=rowspan;
@@ -182,14 +188,28 @@
 	    }
     }
 
+    function makeArray(obj){
+    	return Array.prototype.slice.call(obj,0);
+	}//将伪数组转换成数组
+
+	/*
+	try{
+	    Array.prototype.slice.call(document.documentElement.childNodes, 0)[0].nodeType;
+	}catch(e){
+	    makeArray = function(obj){
+	        var res = [];
+	        for(var i=0,len=obj.length; i<len; i++){
+	            res.push(obj[i]);
+	        }
+	        return res;
+	    }
+	}*/ //兼容浏览器
+
     function get_data(){
     	let typeOfGoods = new Array();
     	let saleOfMonth = new Array();
     	let subOfDate = new Array();
-    	let area_select = document.getElementById("area_select");
-    	let area_select_val = area_select.value;
-    	let type_select = document.getElementById("type_select");
-    	let type_select_val = type_select.value;
+    	
     	for(let key in sourceData){
 	    	if(sourceData[key].region==area_select_val&&sourceData[key].product==type_select_val){
 	    		saleOfMonth.push(sourceData[key].sale);
