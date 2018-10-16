@@ -59,6 +59,7 @@
 		area_key=[];
 		product_key=[];
 		let check_item=document.getElementsByName("check_item");
+		let check_item_p=document.getElementsByName("check_item_p");
 		let item_id=this.id;
 		if(document.getElementById(item_id).checked==true){
 			this.id.checked==false;
@@ -84,21 +85,21 @@
 			check_item[3].checked=true;
 		}
 
-		if(check_item[4].checked==false||check_item[5].checked==false||check_item[6].checked==false){
-			check_item[7].checked=false;
+		if(check_item_p[0].checked==false||check_item_p[1].checked==false||check_item_p[2].checked==false){
+			check_item_p[3].checked=false;
 		}
-		else if(check_item[7].checked==true){
-			if(check_item[4].checked==true&&check_item[5].checked==true&&check_item[6].checked==true){
-				check_item[7].checked=false;
+		else if(check_item_p[3].checked==true){
+			if(check_item_p[0].checked==true&&check_item_p[1].checked==true&&check_item_p[2].checked==true){ 
+				check_item_p[3].checked=false;
 			}
-			else if(check_item[4].checked==false||check_item[5].checked==false||check_item[6].checked==false){
-				check_item[4].checked=true;
-				check_item[5].checked=true;
-				check_item[6].checked=true;
+			else if(check_item_p[0].checked==false||check_item_p[1].checked==false||check_item_p[2].checked==false){
+				check_item_p[0].checked=true;
+				check_item_p[1].checked=true;
+				check_item_p[2].checked=true;
 			}
 		}
-		else if(check_item[4].checked==true&&check_item[5].checked==true&&check_item[6].checked==true){
-			check_item[7].checked=true;
+		else if(check_item_p[0].checked==true&&check_item_p[1].checked==true&&check_item_p[2].checked==true){
+			check_item_p[3].checked=true;
 		}
 
 		for(let i=0;i<check_item.length;i++){
@@ -106,8 +107,13 @@
 				if(i<3){
 					area_key.push(area_item[i]);
 				}
-				else if(i>3){
-					product_key.push(product_item[i-4]);
+			}
+		}
+
+		for(let i=0;i<check_item_p.length;i++){
+			if(check_item_p[i].checked==true){
+				if(i<3){
+					product_key.push(product_item[i]);
 				}
 			}
 		}
@@ -124,9 +130,14 @@
     function set_table(table_area_key,table_product_key){
 
     	let teble_box=document.getElementById("table_box");
+    	let tablenodes=table_box.childNodes;
+    	for(let i=0;i<tablenodes.length;i++){
+    		table_box.removeChild(tablenodes[i]);
+    	}//删除之前生成的table;
     	let table = document.createElement("table");
 	    table_box.appendChild(table);
-	    let maxrow=Math.max(table_area_key.length,table_product_key.length)+1
+	    let maxrow=table_area_key.length*table_product_key.length+1;
+	    let rowspan=table_area_key.length;
 	    for(let i=0;i<maxrow;i++){
 	    	let table_tr = document.createElement("tr");
 	    	table.appendChild(table_tr);
@@ -136,23 +147,32 @@
 	    	}
 	    }
 	    let table_name = document.getElementsByTagName("td");
+	    let td_num=14;
 	    if(table_area_key.length==1&&table_product_key.length>1){
-	    	table_name[0].innerHTML="地区";
-	    	table_name[14].rowSpan=maxrow-1;
+	    	table_name[td_num*0].innerHTML="地区";
+	    	table_name[td_num*1].rowSpan=rowspan;
 	    	
 	    	table_name[1].innerHTML="商品";
 	    	if(table_product_key.length==1){
-	    		table_name[15].rowSpan=maxrow-1;
+	    		table_name[15].rowSpan=rowspan;
 	    	}
 	    }
 	    else{
 	    	table_name[0].innerHTML="商品";
 	    	table_name[1].innerHTML="地区";
-	    	if(table_product_key.length==1){
-	    		table_name[14].rowSpan=maxrow-1;
-	    	}
-	    	else if(table_area_key.length==1){
-	    		table_name[15].rowSpan=maxrow-1;
+	    	switch(table_product_key.length){
+	    		case 1:
+	    			table_name[td_num*1].rowSpan=rowspan;
+	    			break;
+	    		case 2:
+	    			table_name[td_num*1].rowSpan=rowspan;
+	    			table_name[td_num*(1+table_area_key.length)].rowSpan=rowspan;
+	    			break;
+	    		case 3:
+	    			table_name[td_num*1].rowSpan=rowspan;
+	    			table_name[td_num*(1+table_area_key.length)].rowSpan=rowspan;
+	    			table_name[td_num*(1+table_area_key.length*2)].rowSpan=rowspan;
+	    			break;
 	    	}
 	    }
 	    //rowspan="2"
