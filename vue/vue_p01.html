@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>vue_p01</title>
+    <style>
+        #boxbox{
+            border:1px solid black;
+            width:600px;
+            height:600px;
+        }
+        .box{
+            width:600px;
+            height:100px;
+            border-bottom:1px solid black;
+        }
+        .box a{
+            display:block;
+            width:150px;
+            height:100px;
+            float:left;
+        }
+        .box .typea{
+            background-color:blue;
+        }
+        .box2{
+            width:600px;
+            height:500px;
+        }
+    </style>
+</head>
+<body>
+    <div id="boxbox">
+        <div class="box">
+            <a href="#" @click="sign=0" :class="{typea:sign===0}">A</a>
+            <a href="#" @click="sign=1" :class="{typea:sign===1}">B</a>
+            <a href="#" @click="sign=2" :class="{typea:sign===2}">C</a>
+            <a href="#" @click="sign=3" :class="{typea:sign===3}">D</a>
+        </div>
+        <div class="box2">
+            <div v-show:"sign===0">
+                A
+            </div>
+            <div v-show:"sign===1">
+                B
+            </div>
+            <div v-show:"sign===2">
+                C
+            </div>
+            <div v-show:"sign===3">
+                D
+            </div>
+        </div>
+        
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var newapp = new Vue({
+            el:'#boxbox',
+            data:{
+                sign:0
+            }
+        })
+    </script>
+</body>
+</html>
