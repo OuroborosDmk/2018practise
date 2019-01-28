@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+	<style>
+		#demo{
+			width:400px;
+			height:400px;
+			background-color:black;
+		}
+		a{
+			width:300px;
+			height:50px;
+			display:block;
+			background-color:red;
+			color:white;
+			margin-top:20px;
+			margin-right:auto;
+			margin-left:auto;
+		}
+		p{
+			color:white;
+			margin-left:auto;
+			margin-right:auto;
+		}
+	</style>
+</head>
+<body>
+	<div id="demo"> 
+		<p>Services<p>
+		<a @click="subprice(300,sign1)">Web Deveilopment $300.00</a>
+		<a @click="subprice(400,sign2)">Design $400.00</a>
+		<a @click="subprice(250,sign3)">Integration $250.00</a>
+		<a @click="subprice(220,sign4)">Training $220.00</a>
+		<p>---------------------------------------------------------</p>
+		<p>Total: ${{price}}.00</p>
+	</div>
+	<script>
+		new Vue({
+			el:'#demo',
+			data:function(){
+				return{
+					price:0,
+					sign1:true,
+					sign2:true,
+					sign3:true,
+					sign4:true,
+				}
+			},
+			methods:{
+				subprice:function(item,sign){
+					if(sign==true){
+						this.price+=item;
+						sign=false;
+					}
+					else if(sign==false){
+						this.price-=item;
+						sign=true;
+					}
+					
+				}
+			}
+		});
+	</script>
+</body>
+</html>

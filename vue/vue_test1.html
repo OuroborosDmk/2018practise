@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+	<style>
+		nav{
+
+		}
+		a{
+			float:left;
+			display:block;
+			width:100px;
+			height:50px;
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<div id="demoapp"> 
+		<nav id="demonav" v-on:click.prevent>
+			<a href="#" v-on:click="getdemo('HOME')">HOME</a>
+			<a href="#" v-on:click="getdemo('PROJECTS')">PROJECTS</a>
+			<a href="#" v-on:click="getdemo('SERVICES')">SERVICES</a>
+			<a href="#" v-on:click="getdemo('CONTACT')">CONTACT</a>
+		</nav>
+		<p>您选择了<b>{{demo}} 菜单</b></p>
+	</div>
+	<script>
+		new Vue({
+			el: '#demoapp',
+			data: function(){
+				return{
+					demo:'HOME'
+				}
+			},
+			methods: {
+				getdemo: function(item){
+					this.demo=item; 
+				}
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+	<style>
+		.demodiv{
+			width:200px;
+			height:50px;
+			border:5px solid blue;
+		}
+	</style>
+</head>
+<body>
+	<div id="demo"> 
+		<p @click="showfun">{{demotext}}</p>
+		<div class="demodiv" v-if="show"><textarea placeholder="点我，并编辑内容" v-model="demotext"></textarea></div>
+	</div>
+	<script>
+		new Vue({
+			el:'#demo',
+			data:function(){
+				return{
+					show:false,
+					demotext:'点我，并编辑内容'
+				}
+			},
+			methods:{
+				showfun: function(){
+					if(this.show==false){
+						this.show=true;
+					}
+					else if(this.show==true){
+						this.show=false;
+					}
+				}
+			}
+		});
+	</script>
+</body>
+</html>
